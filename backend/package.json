@@ -1,0 +1,20 @@
+{
+	"name": "ntinderu-backend",
+	"version": "0.1.0",
+	"main": "index.js",
+	"repository": "https://github.com/NTinderU/NTinderU",
+	"author": "NTinderU",
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"dotenv-defaults": "^2.0.1",
+		"graphql-yoga": "^0.0.0",
+		"mongoose": "^5.11.9"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.12.10",
+		"@babel/core": "^7.12.10",
+		"@babel/node": "^7.12.10",
+		"@babel/preset-env": "^7.12.11"
+	}
+}
