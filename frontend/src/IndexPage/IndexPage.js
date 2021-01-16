@@ -5,7 +5,11 @@ import Popup from "./Popup/Popup";
 
 const IndexPage = () => {
 	const [popUpShow, setPopUpShow] = useState(false);
+	const [usernameError, setUsernameError] = useState(0);
+	const [passwordError, setPasswordError] = useState(0);
+	const [confirmError, setConfirmError] = useState(0);
 	const [signin, setSignin] = useState(0);
+
 	return (
 		<div className="index">
 			<div className="index-header">
@@ -14,6 +18,8 @@ const IndexPage = () => {
 					size="lg"
 					onClick={() => {
 						setPopUpShow(true);
+						setUsernameError(0);
+						setPasswordError(0);
 						setSignin(1);
 					}}
 				>
@@ -26,6 +32,8 @@ const IndexPage = () => {
 					size="lg"
 					onClick={() => {
 						setPopUpShow(true);
+						setUsernameError(0);
+						setPasswordError(0);
 						setSignin(0);
 					}}
 				>
@@ -34,9 +42,15 @@ const IndexPage = () => {
 			</div>
 			<Popup
 				signin={signin}
+				setsignin={setSignin}
 				show={popUpShow}
 				onHide={() => setPopUpShow(false)}
-				setsignin={setSignin}
+				usernameError={usernameError}
+				passwordError={passwordError}
+				confirmError={confirmError}
+				setUsernameError={setUsernameError}
+				setPasswordError={setPasswordError}
+				setConfirmError={setConfirmError}
 			/>
 		</div>
 	);

@@ -1,7 +1,6 @@
 import dotenv_defaults from "dotenv-defaults";
 import { GraphQLServer, PubSub } from "graphql-yoga";
 import Mongoose from "mongoose";
-import Model from "./models/model";
 
 dotenv_defaults.config();
 

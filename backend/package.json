@@ -7,9 +7,10 @@
 	"license": "MIT",
 	"private": true,
 	"dependencies": {
+		"apollo-server": "^2.19.2",
 		"bcrypt": "^5.0.0",
 		"dotenv-defaults": "^2.0.1",
-		"graphql-yoga": "^1.18.3",
+		"graphql": "^15.4.0",
 		"mongoose": "^5.11.9",
 		"nodemon": "^2.0.6"
 	},
