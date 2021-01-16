@@ -4,9 +4,4 @@ import Routes from "./Routes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
-ReactDOM.render(
-	<React.StrictMode>
-		<Routes />
-	</React.StrictMode>,
-	document.getElementById("root")
-);
+ReactDOM.render(<Routes />, document.getElementById("root"));
