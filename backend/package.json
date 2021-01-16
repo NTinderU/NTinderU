@@ -8,8 +8,12 @@
 	"private": true,
 	"dependencies": {
 		"dotenv-defaults": "^2.0.1",
-		"graphql-yoga": "^0.0.0",
-		"mongoose": "^5.11.9"
+		"graphql-yoga": "^1.18.3",
+		"mongoose": "^5.11.9",
+		"nodemon": "^2.0.6"
+	},
+	"scripts": {
+		"start": "nodemon"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.12.10",

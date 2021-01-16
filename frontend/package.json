@@ -6,14 +6,14 @@
 	"author": "NTinderU",
 	"private": true,
 	"dependencies": {
-		"@testing-library/jest-dom": "^5.11.4",
-		"@testing-library/react": "^11.1.0",
-		"@testing-library/user-event": "^12.1.10",
-		"apollo-boost": "^0.4.9",
+		"@apollo/client": "^3.3.6",
+		"bootstrap": "^4.5.3",
 		"react": "^17.0.1",
 		"react-bootstrap": "^1.4.0",
 		"react-dom": "^17.0.1",
-		"react-scripts": "4.0.1"
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "4.0.1",
+		"sass": "^1.32.4"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -43,6 +43,9 @@
 		"@babel/cli": "^7.12.10",
 		"@babel/core": "^7.12.10",
 		"@babel/node": "^7.12.10",
-		"@babel/preset-env": "^7.12.11"
+		"@babel/preset-env": "^7.12.11",
+		"@testing-library/jest-dom": "^5.11.4",
+		"@testing-library/react": "^11.1.0",
+		"@testing-library/user-event": "^12.1.10"
 	}
 }
