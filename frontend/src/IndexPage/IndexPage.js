@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./IndexPage.scss";
 import logo from "./NTU.png";
-import Popup from "./Popup/Popup";
+import LoginPopup from "./LoginPopup/LoginPopup";
 
 const IndexPage = () => {
 	const [popUpShow, setPopUpShow] = useState(false);
@@ -17,9 +17,9 @@ const IndexPage = () => {
 				<button
 					size="lg"
 					onClick={() => {
-						setPopUpShow(true);
 						setUsernameError(0);
 						setPasswordError(0);
+						setPopUpShow(true);
 						setSignin(1);
 					}}
 				>
@@ -31,16 +31,17 @@ const IndexPage = () => {
 				<button
 					size="lg"
 					onClick={() => {
-						setPopUpShow(true);
 						setUsernameError(0);
 						setPasswordError(0);
+						setConfirmError(0);
+						setPopUpShow(true);
 						setSignin(0);
 					}}
 				>
 					Sign Up
 				</button>
 			</div>
-			<Popup
+			<LoginPopup
 				signin={signin}
 				setsignin={setSignin}
 				show={popUpShow}

@@ -6,9 +6,9 @@ type User {
 
 type Query {
 	"單個帳號"
-	user(username: String!): String
-	"所有帳號"
-	users: [String!]!
+	user(username: String!): User
+	"所有帳號名稱"
+	users: [User!]!
 }
 
 type Mutation {

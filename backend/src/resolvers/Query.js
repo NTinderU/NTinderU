@@ -1,12 +1,8 @@
-"use strict";
 const Query = {
+	user: async (_, { username }, { User }) => await User.findOne({ username }),
 	users: async (_, {}, { User }) => {
 		const result = await User.find().sort({ username: 1 });
-		return result.map((e) => e.username);
-	},
-	user: async (_, { username }, { User }) => {
-		const result = await User.findOne({ username });
-		return result ? result.username : null;
+		return result;
 	},
 };
 
