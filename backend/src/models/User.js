@@ -8,6 +8,8 @@ const userSchema = new Schema({
 		type: String,
 		required: [true, "Password field is required."],
 	},
+	liked: [String],
+	matched: [String]
 });
 
 const User = model("Users", userSchema);

@@ -2,6 +2,8 @@ type User {
 	id: ID!
 	username: String!
 	password: String!
+	liked: [String!]
+	matched: [String!]
 }
 
 type Query {
@@ -9,6 +11,8 @@ type Query {
 	user(username: String!): User
 	"所有帳號名稱"
 	users: [User!]!
+	"取得配對列表"
+	match(data: MatchInput!):[User!]
 }
 
 type Mutation {
@@ -16,9 +20,21 @@ type Mutation {
 	createUser(data: MutationInput!): User
 	"刪除帳號"
 	deleteUser(data: MutationInput!): User
+	"(username)新增一個喜歡的對象(target)"
+	addLikedUser(data: LikedInput!): User
 }
 
 input MutationInput {
 	username: String!
 	password: String!
+}
+
+input MatchInput {
+	username: String!
+	max_count: Int
+}
+
+input LikedInput{
+	username: String!
+	target: String!
 }
