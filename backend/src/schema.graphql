@@ -1,7 +1,23 @@
+scalar Date
+
 type User {
 	id: ID!
 	username: String!
 	password: String!
+}
+
+type Message {
+	id: ID!
+	roomid: String!
+	user: String!
+	body: String!
+    timestamp: Date
+}
+
+type Chatroom {
+	id: ID!
+	users: [User!]!
+	messages: [Message]!
 }
 
 type Query {
@@ -9,6 +25,7 @@ type Query {
 	user(username: String!): User
 	"所有帳號名稱"
 	users: [User!]!
+	chatrooms: [Chatroom]!
 }
 
 type Mutation {
@@ -16,9 +33,14 @@ type Mutation {
 	createUser(data: MutationInput!): User
 	"刪除帳號"
 	deleteUser(data: MutationInput!): User
+	createChatroom(data: chatroomMutationInput!): Chatroom 
 }
 
 input MutationInput {
 	username: String!
 	password: String!
+}
+
+input chatroomMutationInput {
+	users: [String!]!
 }

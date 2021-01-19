@@ -2,6 +2,8 @@ import dotenv_defaults from "dotenv-defaults";
 import { ApolloServer, PubSub } from "apollo-server-express";
 import Mongoose from "mongoose";
 import User from "./models/User";
+import { Message } from "./models/Message"
+import Chatroom from "./models/Chatroom"
 import express from "express";
 import Resolver from "./resolvers";
 import schema from "./schema.graphql";
@@ -29,7 +31,7 @@ db.once("open", () => {
 	const server = new ApolloServer({
 		typeDefs: schema,
 		resolvers: Resolver,
-		context: { User, pubsub },
+		context: { User, Message, Chatroom, pubsub },
 		playground: process.env.NODE_ENV === "development",
 	});
 
