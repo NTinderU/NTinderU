@@ -20,6 +20,13 @@ const Mutation = {
 					(err,_)=> {if(err)console.error(err)})
 		const updated = User.findOne({username:username})
 		return updated
+	},
+	addMatchedUser: async (_, {data: {username, target}}, {User}) => {
+		await User.updateOne({username: username},
+						{$addToSet: {matched: target}},
+						(err,_)=>{if(err) console.error(err)})
+		const updated = User.findOne({username:username})
+		return updated
 	}
 };
 

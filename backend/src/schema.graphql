@@ -22,6 +22,8 @@ type Mutation {
 	deleteUser(data: MutationInput!): User
 	"(username)新增一個喜歡的對象(target)"
 	addLikedUser(data: LikedInput!): User
+	"(username)配對到一個新的對象(target)"
+	addMatchedUser(data: LikedInput!): User
 }
 
 input MutationInput {
