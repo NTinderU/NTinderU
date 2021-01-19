@@ -7,7 +7,7 @@ import Space from "../../svg/Space"
 
 const MatchPanel = (props)=>{
     return (
-        <div>
+        <div className="right-panel">
             <img
 					className="user-picture-big"
 					src="https://via.placeholder.com/320x500.png"

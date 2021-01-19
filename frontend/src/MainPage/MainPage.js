@@ -25,9 +25,9 @@ const MainPage = () => {
 					<ChatroomButton username="test3" lastMessage="test6" />
 				</div>
 			</div>
-			<div className="right-panel">
-				<MatchPanel></MatchPanel>
-			</div>
+			{
+				mode==="match"?<MatchPanel></MatchPanel>:<div></div>
+			}	
 		</div>
 	);
 };
