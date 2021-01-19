@@ -1,0 +1,24 @@
+type User {
+	id: ID!
+	username: String!
+	password: String!
+}
+
+type Query {
+	"單個帳號"
+	user(username: String!): User
+	"所有帳號名稱"
+	users: [User!]!
+}
+
+type Mutation {
+	"新增帳號"
+	createUser(data: MutationInput!): User
+	"刪除帳號"
+	deleteUser(data: MutationInput!): User
+}
+
+input MutationInput {
+	username: String!
+	password: String!
+}
