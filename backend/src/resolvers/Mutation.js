@@ -1,9 +1,9 @@
 const Mutation = {
 	createUser: async (parent, { data }, { User }) => {
-		data.liked=[]
-		data.matched=[]
-		let user = await User.findOne({username: data.username});
+		let user = await User.findOne(data);
 		if (!user) {
+			data.liked=[]
+			data.matched=[]
 			user = new User(data);
 			await user.save();
 			return user;
