@@ -1,0 +1,85 @@
+.main {
+	display: flex;
+	height: 100vh;
+
+	>.left-panel {
+		display: flex;
+		flex-direction: column;
+		width: 25%;
+
+		>.messages {
+			height: 90%;
+			position: relative;
+			background-color: #f8fbfb;
+
+			&::before {
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				position: absolute;
+				pointer-events: none;
+				box-shadow: inset -1em 0 5em -4em black;
+				content: "";
+			}
+		}
+
+		>.profile-wrapper {
+			background: linear-gradient(90deg, #fd277c, #ff7655);
+			display: flex;
+			align-items: center;
+			height: 10%;
+
+			>img.profile-picture {
+				width: 10%;
+				margin: 20px;
+				border-radius: 50%;
+			}
+
+			>.profile-title {
+				font-size: 32px;
+				font-weight: bold;
+				color: #ffffff;
+			}
+		}
+	}
+
+	>.right-panel {
+		width: 75%;
+		position: relative;
+		background-color: #f5f7fa;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		>.mood-buttons {
+			margin: 2em 0;
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.user-picture-big {
+			margin-top: 5%;
+		}
+
+		.keyboard-shortcuts {
+			position: absolute;
+			bottom: 3%;
+			display: flex;
+			justify-content: last baseline;
+
+			span {
+				font-size: smaller;
+			}
+
+			svg {
+				width: 1.5em;
+				margin: 1em;
+
+				&.space-svg {
+					width: 3em;
+				}
+			}
+		}
+	}
+}
