@@ -6,6 +6,7 @@ const Query = {
 			console.log(x)
 		return result;
 	},
+	chatroom: async (_, { id }, { Chatroom }) => await Chatroom.findOne({ _id: id }),
 	chatrooms: async (_, {}, { Chatroom }) => {
 		const result = await Chatroom.find();
 		return result;
