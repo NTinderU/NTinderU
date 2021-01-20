@@ -2,6 +2,22 @@ type User {
 	id: ID!
 	username: String!
 	password: String!
+	liked: [String!]
+	matched: [String!]
+}
+
+type Message {
+	id: ID!
+	from: String!
+	to: String!
+	body: String!
+	timestamp: Date
+}
+
+type Chatroom {
+	id: ID!
+	users: [String!]!
+	messages: [Message]!
 }
 
 type Query {
@@ -21,4 +37,44 @@ type Mutation {
 input MutationInput {
 	username: String!
 	password: String!
+}
+
+input MatchInput {
+	username: String!
+	max_count: Int
+}
+
+input LikedInput {
+	username: String!
+	target: String!
+}
+
+input chatroomMutationInput {
+	users: [String!]!
+}
+
+input messageMutationInput {
+	from: String!
+	to: String!
+	body: String!
+}
+
+type Subscription {
+	message(username: String!): MessageSubscriptionPayload!
+	like(username: String!): SP
+	match(username: String!): SP
+}
+
+enum MutationType {
+	CREATED
+	DELETED
+}
+
+type MessageSubscriptionPayload {
+	mutation: MutationType!
+	data: Message
+}
+
+type SP {
+	data: String!
 }
