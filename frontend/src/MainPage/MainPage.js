@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import ContextStore from "../ContextStore";
 import ChatroomButton from "./ChatroomButton/ChatroomButton";
-import "./MainPage.scss";
 import MatchPanel from "./Panel/MatchPanel";
-import ChatPanel from "./Panel/ChatPanel"
-import Tab from "react-bootstrap/Tab"
-import Tabs from "react-bootstrap/Tabs"
+import ChatPanel from "./Panel/ChatPanel";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+import "./MainPage.scss";
 
 const MainPage = () => {
 	// eslint-disable-next-line no-unused-vars
@@ -22,21 +22,21 @@ const MainPage = () => {
 					/>
 					<div className="profile-title">My Profile</div>
 				</div>
-				<Tabs id="panelSwitcher" activeKey={mode} onSelect={(k)=>setMode(k)}>
-					<Tab eventKey="match" title="Match"></Tab>
-					<Tab eventKey="chat" title="Chat"></Tab>
+				<Tabs id="panelSwitcher" activeKey={mode} onSelect={(k) => setMode(k)}>
+					<Tab eventKey="match" title="Matches" />
+					<Tab eventKey="chat" title="Messages" />
 				</Tabs>
 				<div className="messages">
-					{mode==="chat"?<div>
-					<ChatroomButton username="test1" lastMessage="test4" />
-					<ChatroomButton choosing username="test2" lastMessage="test5" />
-					<ChatroomButton username="test3" lastMessage="test6" /></div>:<div></div>}
-					
+					{mode === "chat" ? (
+						<div>
+							<ChatroomButton username="test1" lastMessage="test4" />
+							<ChatroomButton choosing username="test2" lastMessage="test5" />
+							<ChatroomButton username="test3" lastMessage="test6" />
+						</div>
+					) : null}
 				</div>
 			</div>
-			{
-				mode==="match"?<MatchPanel></MatchPanel>:<ChatPanel></ChatPanel>
-			}	
+			{mode === "match" ? <MatchPanel /> : <ChatPanel />}
 		</div>
 	);
 };

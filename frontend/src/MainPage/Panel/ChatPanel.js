@@ -1,11 +1,5 @@
-import React from "react"
+import React from "react";
 
-const ChatPanel = (props) => {
-    return (
-        <div className="right-panel">
-            <span>This is ChatPanel</span>
-        </div>
-    )
-}
+const ChatPanel = () => <div className="right-panel"></div>;
 
-export default ChatPanel
+export default ChatPanel;
