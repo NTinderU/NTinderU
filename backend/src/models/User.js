@@ -17,6 +17,10 @@ const userSchema = new Schema({
 		required: [false],
 		default: [],
 	},
+	photo: {
+		type: String,
+		required: [true, "Photo is required"]
+	}
 });
 
 const User = model("Users", userSchema);
