@@ -8,10 +8,10 @@
 		width: 25%;
 
 		>.messages {
-			height: 90%;
+			height: 85%;
 			position: relative;
 			background-color: #f8fbfb;
-
+			padding-top: 3%;
 			&::before {
 				top: 0;
 				bottom: 0;
@@ -23,7 +23,7 @@
 				content: "";
 			}
 		}
-
+		
 		>.profile-wrapper {
 			background: linear-gradient(90deg, #fd277c, #ff7655);
 			display: flex;
@@ -59,7 +59,7 @@
 		}
 
 		.user-picture-big {
-			margin-top: 5%;
+			margin-top: 10%;
 		}
 
 		.keyboard-shortcuts {
