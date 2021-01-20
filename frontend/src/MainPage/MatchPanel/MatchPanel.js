@@ -56,12 +56,10 @@ const MatchPanel = ({matchCount}) => {
 
 	if(loading) return (<span>Loading...</span>)
 	if(error) return (<span>{error}</span>)
-	console.log(matchIndex)
+	console.log(data.match)
 
 	return (
 		<div className="match-panel">
-			
-			<span>{getMatchObject().username}</span>
 			<img
 				className="user-picture-big"
 				src="https://via.placeholder.com/320x500.png"

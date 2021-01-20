@@ -4,20 +4,31 @@ import ChatroomButton from "./ChatroomButton/ChatroomButton";
 import MatchPanel from "./MatchPanel/MatchPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
 import "./MainPage.scss";
+import { useQuery } from "@apollo/client";
+import QueryPhoto from "./graphql/QueryPhoto"
 
 const MainPage = () => {
 	// eslint-disable-next-line no-unused-vars
 	const { loggedInUser } = useContext(ContextStore);
 	const [mode, setMode] = useState("Matches");
 	const [matchCount, setMatchCount] = useState(3);
-
+	const {loading, error, data} = useQuery(QueryPhoto,{
+		variables:{
+			username: loggedInUser
+		}
+	})
+	if(loading) return null
+	if(error){
+		console.error(error);
+		return null;
+	}
 	return (
 		<div className="main">
 			<div className="left-panel">
 				<div className="profile-wrapper">
 					<img
 						className="profile-picture"
-						src="https://via.placeholder.com/100.png"
+						src={data.user.photo}
 						alt="X"
 					/>
 					<div className="profile-title">My Profile</div>

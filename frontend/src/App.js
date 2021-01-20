@@ -7,10 +7,10 @@ const App = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [loggedInUser, setLoggedInUser] = useState("");
 	return (
-		<Imgur />
-		// <ContextStore.Provider value={{ setLoggedIn, loggedInUser, setLoggedInUser }}>
-		// 	{loggedIn ? <MainPage /> : <IndexPage />}
-		// </ContextStore.Provider>
+		//<Imgur />
+		<ContextStore.Provider value={{ setLoggedIn, loggedInUser, setLoggedInUser }}>
+		 	{loggedIn ? <MainPage /> : <IndexPage />}
+		</ContextStore.Provider>
 	);
 };
 
