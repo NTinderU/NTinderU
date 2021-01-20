@@ -9,6 +9,8 @@ const MainPage = () => {
 	// eslint-disable-next-line no-unused-vars
 	const { loggedInUser } = useContext(ContextStore);
 	const [mode, setMode] = useState("Matches");
+	const [matchCount, setMatchCount] = useState(3);
+
 	return (
 		<div className="main">
 			<div className="left-panel">
@@ -44,7 +46,7 @@ const MainPage = () => {
 					) : null}
 				</div>
 			</div>
-			{mode === "Matches" ? <MatchPanel /> : <ChatPanel />}
+			{mode === "Matches" ? <MatchPanel matchCount={matchCount}/> : <ChatPanel />}
 		</div>
 	);
 };

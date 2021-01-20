@@ -13,6 +13,7 @@ const Query = {
 		return result;
 	},
 	match: async (parent, { data: { username, max_count } }, { User }) => {
+		console.log(username," query ",max_count)
 		const self = await User.findOne({ username: username });
 		const notMatchedFilter = { username: { $nin: self.matched } };
 		const notSelfFilter = { username: { $ne: username } };
