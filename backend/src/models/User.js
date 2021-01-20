@@ -1,4 +1,5 @@
 import { Schema, model } from "mongoose";
+
 const userSchema = new Schema({
 	username: {
 		type: String,
@@ -7,6 +8,14 @@ const userSchema = new Schema({
 	password: {
 		type: String,
 		required: [true, "Password field is required."],
+	},
+	liked: [String],
+	matched: [String],
+	rooms: {
+		type: Map,
+		of: String,
+		required: [false],
+		default: [],
 	},
 });
 
