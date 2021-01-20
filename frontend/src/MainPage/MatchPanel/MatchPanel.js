@@ -1,12 +1,12 @@
 import React from "react";
-import MoodButton from "../MoodButton/MoodButton";
+import MoodButton from "./MoodButton/MoodButton";
 import ArrowBox from "../../svg/ArrowBox";
 import Enter from "../../svg/Enter";
 import Space from "../../svg/Space";
-import "../MainPage.scss";
+import "./MatchPanel.scss";
 
 const MatchPanel = () => (
-	<div className="right-panel">
+	<div className="match-panel">
 		<img
 			className="user-picture-big"
 			src="https://via.placeholder.com/320x500.png"

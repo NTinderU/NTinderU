@@ -1,8 +1,8 @@
 import React from "react";
 import "./MoodButton.scss";
-import Star from "../../svg/Star";
-import Heart from "../../svg/Heart";
-import X from "../../svg/X";
+import Star from "../../../svg/Star";
+import Heart from "../../../svg/Heart";
+import X from "../../../svg/X";
 
 const MoodButton = ({ type }) => (
 	<button className={`mood-button${type ? ` mood-${type}` : ""}`}>
