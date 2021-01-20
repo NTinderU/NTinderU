@@ -1,3 +1,4 @@
+import { WatchIgnorePlugin } from "webpack";
 import { randomShuffle } from "../utils/utils";
 
 const Query = {
@@ -14,7 +15,7 @@ const Query = {
 	},
 	match: async (parent, { data: { username, max_count } }, { User }) => {
 		console.log(username," query ",max_count)
-		const self = await User.findOne({ username: username });
+		let self = await User.findOne({ username: username });
 		const notMatchedFilter = { username: { $nin: self.matched } };
 		const notSelfFilter = { username: { $ne: username } };
 		// except the calling one

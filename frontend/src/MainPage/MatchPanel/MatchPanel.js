@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useEffect, useState} from "react";
 import MoodButton from "./MoodButton/MoodButton";
 import ArrowBox from "../../svg/ArrowBox";
 import Enter from "../../svg/Enter";
@@ -8,7 +8,9 @@ import "./MatchPanel.scss";
 import ContextStore from "../../ContextStore"
 import QueryMatch from "./graphql/QueryMatch"
 import AddLikedTarget from "./graphql/AddLikedTarget"
+import AddMatchedTarget from "./graphql/AddMatchedTarget"
 import { useMutation, useQuery } from "@apollo/client";
+//import {GlobalHotKeys} from "react-hotkeys"
 
 const MatchPanel = ({matchCount}) => {
 	const { loggedInUser } = useContext(ContextStore);
@@ -18,8 +20,10 @@ const MatchPanel = ({matchCount}) => {
 		{variables: {username: loggedInUser,
 					max_count: matchCount}})
 	const [addLikedTarget, Likedres] = useMutation(AddLikedTarget)
+	const [addMatchedTarget, Matchedres] = useMutation(AddMatchedTarget)
 
 	const nextPeople = ()=>{
+		console.log(matchIndex, data)
 		if(matchIndex===data.match.length-1){
 			console.log("No more people")
 			setIsEnd(true)
@@ -29,6 +33,13 @@ const MatchPanel = ({matchCount}) => {
 		}
 	}
 	const getMatchObject = ()=>{
+		console.log("getting...")
+		if(data===null){
+			return{
+				username: "No People",
+				liked:[]
+			}
+		}
 		if(data.match.length===0||isEnd){
 			return {
 				username: "No People",
@@ -44,22 +55,33 @@ const MatchPanel = ({matchCount}) => {
 	}
 
 	const likeSomeone = ()=>{
-		let target = getMatchObject().username
-		console.log("target:", target)
+		let obj = getMatchObject()
+		let target = obj.username
 		if(target!=="No People"){
+			console.log("target:", target)
 			addLikedTarget({variables:{
 				username: loggedInUser,
 				target:target
 			}})
+			if(obj.liked.includes(loggedInUser)){
+				console.log("Match! ",loggedInUser, target)
+				addMatchedTarget({variables:{
+					username: loggedInUser,
+					target: target
+				}})
+			}
 		}
 	}
 
 	if(loading) return (<span>Loading...</span>)
-	if(error) return (<span>{error}</span>)
-	console.log(data.match)
-
+	if(error){
+		console.log(error)
+		return null;
+	}
+	
 	return (
 		<div className="match-panel">
+			<span>{getMatchObject().username}</span>
 			<img
 				className="user-picture-big"
 				src="https://via.placeholder.com/320x500.png"

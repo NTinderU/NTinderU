@@ -5,6 +5,7 @@ export default gql`
 		match(data:{username:$username, max_count:$max_count}) {
 			username
 			liked
+			photo
 		}
 	}
 `;

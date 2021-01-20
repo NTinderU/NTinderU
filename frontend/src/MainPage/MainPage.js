@@ -28,7 +28,7 @@ const MainPage = () => {
 				<div className="profile-wrapper">
 					<img
 						className="profile-picture"
-						src={data.user.photo}
+						src={data.user?data.user.photo:"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"}
 						alt="X"
 					/>
 					<div className="profile-title">My Profile</div>

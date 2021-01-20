@@ -33,13 +33,14 @@ const Mutation = {
 		return updated;
 	},
 	addMatchedUser: async (parent, { data: { username, target } }, { User, pubsub }) => {
-		await User.updateOne({ username: username }, { $addToSet: { matched: target } }, (err) => {
+		await User.updateOne({username:username}, { $addToSet: { matched: target } }, (err) => {
 			if (err) console.error(err);
 			pubsub.publish(`match with ${target}`, {
 				match: { data: `${username} matched with you.` },
 			});
 			console.log(`${username} matched with ${target}`);
 		});
+		await User.updateOne({username:target}, {$addToSet: {matched: username}}, (err) => {if(err)console.error(err)})
 		const updated = await User.findOne({ username: username });
 		return updated;
 	},
