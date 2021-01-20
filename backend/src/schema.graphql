@@ -96,5 +96,6 @@ type MessageSubscriptionPayload {
 }
 
 type SP {
-	data: String!
+	mutation: MutationType!
+	data: Match!
 }

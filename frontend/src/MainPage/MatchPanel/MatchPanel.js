@@ -36,19 +36,22 @@ const MatchPanel = ({matchCount}) => {
 		if(data===null){
 			return{
 				username: "No People",
-				liked:[]
+				liked:[],
+				photo: "https://via.placeholder.com/320x500.png"
 			}
 		}
 		if(data.match.length===0||isEnd){
 			return {
 				username: "No People",
-				liked: []
+				liked: [],
+				photo: "https://via.placeholder.com/320x500.png"
 			}
 		}
 		else{
 			return{
 				username: data.match[matchIndex].username,
-				liked: data.match[matchIndex].liked
+				liked: data.match[matchIndex].liked,
+				photo: data.match[matchIndex].photo
 			}
 		}
 	}
@@ -83,7 +86,7 @@ const MatchPanel = ({matchCount}) => {
 			<span>{getMatchObject().username}</span>
 			<img
 				className="user-picture-big"
-				src="https://via.placeholder.com/320x500.png"
+				src={getMatchObject().photo}
 				alt="帥哥 || 美女"
 			/>
 			<div className="mood-buttons">

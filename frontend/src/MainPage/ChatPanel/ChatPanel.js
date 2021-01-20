@@ -6,11 +6,8 @@ import SubscribeMessage from "../graphql/SubscribeMessage";
 import Submit from "../../svg/Submit";
 import "./ChatPanel.scss";
 
-const ChatPanel = (props) => {
-	return (<div></div>)
-	const current_username = "NL"; // should be props
-	const target_username = "overloadtw";
-	const [current_roomid, setRoom] = useState("6007c0e50fc2da24505b51da"); // should be props
+const ChatPanel = ({current_username, target_username, current_roomid}) => {
+	console.log("Chat Panel",target_username, current_roomid)
 	const { loading, error, data, subscribeToMore } = useQuery(queryChatroom, {
 		variables: { id: current_roomid },
 	});
@@ -36,7 +33,7 @@ const ChatPanel = (props) => {
 				};
 			},
 		});
-	}, [subscribeToMore]);
+	}, [subscribeToMore,current_username]);
 
 	const handleMessage = () => {
 		addMessage({
@@ -68,7 +65,7 @@ const ChatPanel = (props) => {
                 };
             },
         });
-	}, [subscribeToMore]);
+	}, [subscribeToMore,current_username,target_username]);
 	return (
 		<div className="chat-panel">
 			<div className="chat-header">
@@ -77,7 +74,7 @@ const ChatPanel = (props) => {
 					src="https://via.placeholder.com/100x100.png"
 					alt="profile"
 				/>
-				<div>blahblahblah</div>
+				<div>{target_username}</div>
 			</div>
 			<div className="chat-messages">
 				{loading ? (

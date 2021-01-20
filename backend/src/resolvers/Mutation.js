@@ -35,16 +35,12 @@ const Mutation = {
 	addMatchedUser: async (parent, { data: { username, target } }, { User, pubsub }) => {
 		await User.updateOne({username:username}, { $addToSet: { matched: target } }, (err) => {
 			if (err) console.error(err);
-			pubsub.publish(`match with ${target}`, {
-				match: { data: `${username} matched with you.` },
-			});
-			console.log(`${username} matched with ${target}`);
 		});
 		await User.updateOne({username:target}, {$addToSet: {matched: username}}, (err) => {if(err)console.error(err)})
 		const updated = await User.findOne({ username: username });
 		return updated;
 	},
-	createChatroom: async (parent, { data }, { User, Chatroom }) => {
+	createChatroom: async (parent, { data }, { User, Chatroom , pubsub}) => {
 		let room = new Chatroom(data);
 		let un1 = data.users[0],
 			un2 = data.users[1];
@@ -60,6 +56,25 @@ const Mutation = {
 		await u2.rooms.set(un1, room._id);
 		await u1.save();
 		await u2.save();
+		console.log(room)
+		pubsub.publish(`match with ${un1}`,{
+			match:{
+				mutation: "CREATED",
+				data:{
+					target: un2,
+					roomID: room.id
+				}
+			}
+		})
+		pubsub.publish(`match with ${un2}`,{
+			match:{
+				mutation: "CREATED",
+				data:{
+					target: un1,
+					roomID: room.id
+				}
+			}
+		})
 		return room;
 	},
 	createMessage: async (parent, { id, data }, { Chatroom, pubsub }) => {

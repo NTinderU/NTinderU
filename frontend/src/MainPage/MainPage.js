@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ContextStore from "../ContextStore";
 import RoomList from "./RoomList/RoomList"
 import MatchPanel from "./MatchPanel/MatchPanel";
@@ -13,11 +13,14 @@ const MainPage = () => {
 	const { loggedInUser } = useContext(ContextStore);
 	const [mode, setMode] = useState("Matches");
 	const [matchCount, setMatchCount] = useState(3);
-	const {loading, error, data} = useQuery(QueryPhoto,{
+	const [roomid, setRoomID] = useState("none")
+	const [target_name, setTargetName] = useState("none")
+	const {loading, error, data, subscribeToMore } = useQuery(QueryPhoto,{
 		variables:{
 			username: loggedInUser
 		}
 	})
+
 	if(loading) return null
 	if(error){
 		console.error(error);
@@ -51,11 +54,11 @@ const MainPage = () => {
 				</div>
 				<div className="messages">
 					{mode === "Messages" ? (
-						<RoomList rooms={data.getrooms}></RoomList>
+						<RoomList rooms={data.getrooms} setRoomID={setRoomID} setTargetName={setTargetName}></RoomList>
 					) : null}
 				</div>
 			</div>
-			{mode === "Matches" ? <MatchPanel matchCount={matchCount}/> : <ChatPanel />}
+			{mode === "Matches" ? <MatchPanel matchCount={matchCount}/> : roomid!=="none"?<ChatPanel current_roomid={roomid} target_username={target_name} current_username={loggedInUser}/>:<div>You don't have any chatroom</div>}
 		</div>
 	);
 };

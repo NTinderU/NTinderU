@@ -6,5 +6,8 @@ export default gql`
 			username
 			liked
 		}
+		createChatroom(data:{users:[$username, $target]}){
+			id
+		}
 	}
 `;
