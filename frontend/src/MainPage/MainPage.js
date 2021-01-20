@@ -26,6 +26,7 @@ const MainPage = () => {
 		console.error(error);
 		return null;
 	}
+
 	console.log(data)
 	return (
 		<div className="main">
@@ -47,7 +48,9 @@ const MainPage = () => {
 					</button>
 					<button
 						className={`${mode === "Messages" ? "mode-choosing" : ""}`}
-						onClick={() => setMode("Messages")}
+						onClick={() => { let rooms = data.getrooms
+							if(rooms.length>0){setRoomID(rooms[0].roomID);setTargetName(rooms[0].target)}
+							setMode("Messages")}}
 					>
 						Messages
 					</button>
