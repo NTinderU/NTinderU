@@ -25,16 +25,21 @@ const ChatPanel = () => {
             document: SubscribeMessage,
             variables: { username: current_username },
             updateQuery: (prev, { subscriptionData }) => {
-                console.log("updated");
-                if (!subscriptionData.data) return prev;
-                const newMsg = subscripetionData.data.message.data;
-                console.log(subscriptionData.data);
+                alert("updated");
+                const prevMsg = prev.chatroom.messages;
+                if (!subscriptionData.data) return prevMsg;
+                const newMsg = subscriptionData.data.message.data;
+                console.log([...prevMsg, newMsg]);
                 if (newMsg.from === target_username) {
                     alert(`Got a new message from ${newMsg.from}`);
                 }
                 return {
-                    ...prev,
-                    messages: [...prev.messages, newMsg],
+                    prev,
+                    chatroom: {
+                        id: current_roomid,
+                        users: [current_username, target_username],
+                        messages: [...prevMsg, newMsg],
+                    }
                 };
             },
         });
