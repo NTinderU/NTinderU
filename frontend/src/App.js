@@ -4,7 +4,7 @@ import ContextStore from "./ContextStore";
 import MainPage from "./MainPage/MainPage";
 import Imgur from "./UploadPage/Imgur"
 const App = () => {
-	const [loggedIn, setLoggedIn] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(true);
 	const [loggedInUser, setLoggedInUser] = useState("");
 	return (
 		<Imgur />

@@ -7,28 +7,11 @@
 		flex-direction: column;
 		width: 25%;
 
-		>.messages {
-			height: 90%;
-			position: relative;
-			background-color: #f8fbfb;
-
-			&::before {
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				position: absolute;
-				pointer-events: none;
-				box-shadow: inset -1em 0 5em -4em black;
-				content: "";
-			}
-		}
-
 		>.profile-wrapper {
 			background: linear-gradient(90deg, #fd277c, #ff7655);
 			display: flex;
 			align-items: center;
-			height: 10%;
+			height: 9%;
 
 			>img.profile-picture {
 				width: 10%;
@@ -42,43 +25,39 @@
 				color: #ffffff;
 			}
 		}
-	}
 
-	>.right-panel {
-		width: 75%;
-		position: relative;
-		background-color: #f5f7fa;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-
-		>.mood-buttons {
-			margin: 2em 0;
+		>.mode-buttons {
+			height: 6%;
 			display: flex;
-			justify-content: space-evenly;
-		}
+			align-items: center;
 
-		.user-picture-big {
-			margin-top: 5%;
-		}
+			>button {
+				margin-left: 10%;
+				color: #000000;
+				background-color: #ffffff;
+				font-weight: bold;
 
-		.keyboard-shortcuts {
-			position: absolute;
-			bottom: 3%;
-			display: flex;
-			justify-content: last baseline;
-
-			span {
-				font-size: smaller;
-			}
-
-			svg {
-				width: 1.5em;
-				margin: 1em;
-
-				&.space-svg {
-					width: 3em;
+				&.mode-choosing {
+					border-bottom: 2px solid #fd5068;
 				}
+			}
+		}
+
+		>.messages {
+			height: 84%;
+			position: relative;
+			background-color: #f8fbfb;
+			padding-top: 3%;
+
+			&::before {
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				position: absolute;
+				pointer-events: none;
+				box-shadow: inset -1em 0 7em -7em black;
+				content: "";
 			}
 		}
 	}

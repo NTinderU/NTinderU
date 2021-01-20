@@ -1,3 +1,5 @@
+scalar Date
+
 type User {
 	id: ID!
 	username: String!
@@ -25,6 +27,10 @@ type Query {
 	user(username: String!): User
 	"所有帳號名稱"
 	users: [User!]!
+	"取得配對列表"
+	match(data: MatchInput!): [User!]
+	chatroom(id: ID!): Chatroom
+	chatrooms: [Chatroom]!
 }
 
 type Mutation {
@@ -32,6 +38,12 @@ type Mutation {
 	createUser(data: MutationInput!): User
 	"刪除帳號"
 	deleteUser(data: MutationInput!): User
+	"(username)新增一個喜歡的對象(target)"
+	addLikedUser(data: LikedInput!): User
+	"(username)配對到一個新的對象(target)"
+	addMatchedUser(data: LikedInput!): User
+	createChatroom(data: chatroomMutationInput!): Chatroom
+	createMessage(id: ID!, data: messageMutationInput!): Message
 }
 
 input MutationInput {
