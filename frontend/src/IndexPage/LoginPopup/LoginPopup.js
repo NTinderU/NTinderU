@@ -86,7 +86,7 @@ const Popup = (props) => {
 		if (username) loadUser();
 	}, [username, loadUser]);
 
-	useEffect(() => {
+	useEffect(async () => {
 		if (username && password && data) {
 			if (!props.signin) {
 				if (data.user !== null) {
@@ -97,7 +97,7 @@ const Popup = (props) => {
 				} else if (queryResult.current) {
 					// new user
 					const hashPassword = hashSync(password, 10);
-					createUser({ variables: { username, password: hashPassword } });
+					await createUser({ variables: { username, password: hashPassword } });
 					// set login success
 					setLoggedIn(true);
 					setLoggedInUser(username);
