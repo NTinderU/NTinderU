@@ -33,7 +33,6 @@ const MatchPanel = ({matchCount}) => {
 		}
 	}
 	const getMatchObject = ()=>{
-		console.log("getting...")
 		if(data===null){
 			return{
 				username: "No People",
