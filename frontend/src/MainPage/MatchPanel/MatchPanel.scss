@@ -1,26 +1,26 @@
 .match-panel {
-	width: 75%;
+	width: 75vw;
 	position: relative;
 	background-color: #f5f7fa;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-
+	overflow: hidden;
 	>.mood-buttons {
-		margin: 2em 0;
+		margin: 2vh 0;
 		display: flex;
 		justify-content: space-evenly;
 	}
 
 	.user-picture-big {
-		margin-top: 10%;
+		margin-top: 8vh;
+		height: 60vh;
 	}
 
 	.keyboard-shortcuts {
-		position: absolute;
-		bottom: 3%;
+		position: relative;
 		display: flex;
-		justify-content: last baseline;
+		justify-content: center;
 
 		span {
 			font-size: smaller;
