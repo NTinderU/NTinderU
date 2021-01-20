@@ -2,29 +2,22 @@ import dotenv_defaults from "dotenv-defaults";
 import { ApolloServer, PubSub } from "apollo-server-express";
 import Mongoose from "mongoose";
 import User from "./models/User";
-import { Message } from "./models/Message";
-import Chatroom from "./models/Chatroom";
 import express from "express";
 import Resolver from "./resolvers";
 import schema from "./schema.graphql";
-<<<<<<< HEAD
-import { createServer } from 'http';
-=======
-import { createServer } from "http";
->>>>>>> ebcfde161580cfba85ba57029f14c3dcd6a84d35
 
 dotenv_defaults.config();
 
 if (!process.env.MONGO_URL) {
-    console.error("Missing MONGO_URL.");
-    process.exit(1);
+	console.error("Missing MONGO_URL.");
+	process.exit(1);
 }
 
 const pubsub = new PubSub();
 
 Mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
 });
 
 const db = Mongoose.connection;
@@ -32,38 +25,18 @@ const db = Mongoose.connection;
 db.on("error", (error) => console.error(error));
 
 db.once("open", () => {
-<<<<<<< HEAD
-    console.log("MongoDB connected.");
-    const server = new ApolloServer({
-        typeDefs: schema,
-        resolvers: Resolver,
-        context: { User, Message, Chatroom, pubsub },
-        playground: process.env.NODE_ENV === "development",
-    });
-=======
 	console.log("MongoDB connected.");
 	const server = new ApolloServer({
 		typeDefs: schema,
 		resolvers: Resolver,
-		context: { User, Message, Chatroom, pubsub },
+		context: { User, pubsub },
 		playground: process.env.NODE_ENV === "development",
 	});
->>>>>>> ebcfde161580cfba85ba57029f14c3dcd6a84d35
 
-    let App = express();
-    server.applyMiddleware({ app: App, path: "/" });
+	let App = express();
+	server.applyMiddleware({ app: App, path: "/" });
 
 	const PORT = process.env.PORT || 4000;
-	
-	const httpServer = createServer(App);
-	server.installSubscriptionHandlers(httpServer);
 
-<<<<<<< HEAD
-    httpServer.listen(PORT, () => console.log(`server running at port ${PORT}.`));
-=======
-	const httpServer = createServer(App);
-	server.installSubscriptionHandlers(httpServer);
-
-	httpServer.listen(PORT, () => console.log(`server running at port ${PORT}.`));
->>>>>>> ebcfde161580cfba85ba57029f14c3dcd6a84d35
+	App.listen(PORT, () => console.log(`server running at port ${PORT}.`));
 });
