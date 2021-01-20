@@ -5,5 +5,9 @@ export default gql`
 		user(username:$username) {
 			photo
 		}
+		getrooms(username:$username){
+    		target
+    		roomID
+  		}
 	}
 `;

@@ -33,6 +33,12 @@ type Query {
 	match(data: MatchInput!): [User!]
 	chatroom(id: ID!): Chatroom
 	chatrooms: [Chatroom]!
+	getrooms(username: String!): [Match!]
+}
+
+type Match{
+	target: String!
+	roomID: ID!
 }
 
 type Mutation {

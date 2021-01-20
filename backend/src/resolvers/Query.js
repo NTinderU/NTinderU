@@ -22,6 +22,15 @@ const Query = {
 		const others = await User.find({ $and: [notSelfFilter, notMatchedFilter] });
 		return randomShuffle(others, max_count);
 	},
+	getrooms: async (parent, {username}, {User}) =>{
+		const self = await User.findOne({username:username})
+		//console.log(self.rooms)
+		let ret = []
+		for(let room of self.rooms)
+			ret.push({target: room[0], roomID: room[1]})
+		
+		return ret
+	}
 };
 
 export default Query;

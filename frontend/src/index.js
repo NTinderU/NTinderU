@@ -6,7 +6,7 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
-const uri = /* "http://localhost:4000" // */"https://ntinderu-backend.herokuapp.com/";
+const uri =  "http://localhost:4000" // /"https://ntinderu-backend.herokuapp.com/";
 const link = new HttpLink({ uri: uri });
 
 const client = new ApolloClient({

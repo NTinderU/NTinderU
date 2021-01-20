@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import ContextStore from "../ContextStore";
-import ChatroomButton from "./ChatroomButton/ChatroomButton";
+import RoomList from "./RoomList/RoomList"
 import MatchPanel from "./MatchPanel/MatchPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
 import "./MainPage.scss";
 import { useQuery } from "@apollo/client";
 import QueryPhoto from "./graphql/QueryPhoto"
+
 
 const MainPage = () => {
 	// eslint-disable-next-line no-unused-vars
@@ -22,6 +23,7 @@ const MainPage = () => {
 		console.error(error);
 		return null;
 	}
+	console.log(data)
 	return (
 		<div className="main">
 			<div className="left-panel">
@@ -49,11 +51,7 @@ const MainPage = () => {
 				</div>
 				<div className="messages">
 					{mode === "Messages" ? (
-						<div>
-							<ChatroomButton username="test1" lastMessage="test4" />
-							<ChatroomButton choosing username="test2" lastMessage="test5" />
-							<ChatroomButton username="test3" lastMessage="test6" />
-						</div>
+						<RoomList rooms={data.getrooms}></RoomList>
 					) : null}
 				</div>
 			</div>

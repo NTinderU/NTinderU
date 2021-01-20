@@ -7,6 +7,7 @@ import Submit from "../../svg/Submit";
 import "./ChatPanel.scss";
 
 const ChatPanel = (props) => {
+	return (<div></div>)
 	const current_username = "NL"; // should be props
 	const target_username = "overloadtw";
 	const [current_roomid, setRoom] = useState("6007c0e50fc2da24505b51da"); // should be props
@@ -67,7 +68,7 @@ const ChatPanel = (props) => {
                 };
             },
         });
-    }, [subscribeToMore]);
+	}, [subscribeToMore]);
 	return (
 		<div className="chat-panel">
 			<div className="chat-header">
