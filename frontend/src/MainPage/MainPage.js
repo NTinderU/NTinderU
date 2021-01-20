@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ContextStore from "../ContextStore";
 import ChatroomButton from "./ChatroomButton/ChatroomButton";
-import MoodButton from "./MoodButton/MoodButton";
+import MatchPanel from "./MatchPanel/MatchPanel";
+import ChatPanel from "./ChatPanel/ChatPanel";
 import "./MainPage.scss";
-import ArrowBox from "../svg/ArrowBox";
-import Enter from "../svg/Enter";
-import Space from "../svg/Space";
 
 const MainPage = () => {
 	// eslint-disable-next-line no-unused-vars
 	const { loggedInUser } = useContext(ContextStore);
+	const [mode, setMode] = useState("Matches");
 	return (
 		<div className="main">
 			<div className="left-panel">
@@ -21,50 +20,31 @@ const MainPage = () => {
 					/>
 					<div className="profile-title">My Profile</div>
 				</div>
+				<div className="mode-buttons">
+					<button
+						className={`${mode === "Matches" ? "mode-choosing" : ""}`}
+						onClick={() => setMode("Matches")}
+					>
+						Matches
+					</button>
+					<button
+						className={`${mode === "Messages" ? "mode-choosing" : ""}`}
+						onClick={() => setMode("Messages")}
+					>
+						Messages
+					</button>
+				</div>
 				<div className="messages">
-					<ChatroomButton username="test1" lastMessage="test4" />
-					<ChatroomButton choosing username="test2" lastMessage="test5" />
-					<ChatroomButton username="test3" lastMessage="test6" />
+					{mode === "Messages" ? (
+						<div>
+							<ChatroomButton username="test1" lastMessage="test4" />
+							<ChatroomButton choosing username="test2" lastMessage="test5" />
+							<ChatroomButton username="test3" lastMessage="test6" />
+						</div>
+					) : null}
 				</div>
 			</div>
-			<div className="right-panel">
-				<img
-					className="user-picture-big"
-					src="https://via.placeholder.com/320x500.png"
-					alt="帥哥 || 美女"
-				/>
-				<div className="mood-buttons">
-					<MoodButton type="x" />
-					<MoodButton type="star" />
-					<MoodButton type="heart" />
-				</div>
-				<footer className="keyboard-shortcuts">
-					<div>
-						<ArrowBox direction="left" />
-						<span>NOPE</span>
-					</div>
-					<div>
-						<ArrowBox direction="right" />
-						<span>LIKE</span>
-					</div>
-					<div>
-						<ArrowBox direction="top" />
-						<span>OPEN PROFILE</span>
-					</div>
-					<div>
-						<ArrowBox direction="bottom" />
-						<span>CLOSE PROFILE</span>
-					</div>
-					<div>
-						<Enter />
-						<span>SUPER LIKE</span>
-					</div>
-					<div>
-						<Space />
-						<span>NEXT PHOTO</span>
-					</div>
-				</footer>
-			</div>
+			{mode === "Matches" ? <MatchPanel /> : <ChatPanel />}
 		</div>
 	);
 };

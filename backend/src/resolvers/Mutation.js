@@ -2,6 +2,9 @@ const Mutation = {
 	createUser: async (parent, { data }, { User }) => {
 		let user = await User.findOne(data);
 		if (!user) {
+			data.liked = [];
+			data.matched = [];
+			data.rooms = [];
 			user = new User(data);
 			await user.save();
 			return user;

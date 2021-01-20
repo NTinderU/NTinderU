@@ -1,0 +1,38 @@
+.match-panel {
+	width: 75%;
+	position: relative;
+	background-color: #f5f7fa;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+
+	>.mood-buttons {
+		margin: 2em 0;
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.user-picture-big {
+		margin-top: 10%;
+	}
+
+	.keyboard-shortcuts {
+		position: absolute;
+		bottom: 3%;
+		display: flex;
+		justify-content: last baseline;
+
+		span {
+			font-size: smaller;
+		}
+
+		svg {
+			width: 1.5em;
+			margin: 1em;
+
+			&.space-svg {
+				width: 3em;
+			}
+		}
+	}
+}
