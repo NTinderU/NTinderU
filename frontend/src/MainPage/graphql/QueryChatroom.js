@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export default gql`
-    query($id: ID!) {
+    query($id: ID!,$target: String!) {
         chatroom(id: $id) {
             id
             users
@@ -10,6 +10,9 @@ export default gql`
                 body
                 timestamp
             }
+        }
+        user(username:$target){
+            photo
         }
     }
 `;

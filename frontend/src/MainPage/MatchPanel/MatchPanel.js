@@ -94,7 +94,7 @@ const MatchPanel = ({matchCount}) => {
 				{/*<MoodButton type="star" onClick={()=>{nextPeople()}}/>*/}
 				<MoodButton type="heart" onClick={async ()=>{await likeSomeone()
 															nextPeople()}}/>
-			</div>
+			</div>{/*
 			<footer className="keyboard-shortcuts">
 				<div>
 					<ArrowBox direction="left" />
@@ -120,7 +120,7 @@ const MatchPanel = ({matchCount}) => {
 					<Space />
 					<span>NEXT PHOTO</span>
 				</div>
-			</footer>
+			</footer>*/}
 		</div>
 	);
 }

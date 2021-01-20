@@ -9,7 +9,8 @@ import "./ChatPanel.scss";
 const ChatPanel = ({current_username, target_username, current_roomid}) => {
 	console.log("Chat Panel",target_username, current_roomid)
 	const { loading, error, data, subscribeToMore } = useQuery(queryChatroom, {
-		variables: { id: current_roomid },
+		variables: { id: current_roomid,
+					target: target_username },
 	});
 	const [body, setBody] = useState("");
 	const [addMessage] = useMutation(createMessage);
@@ -66,12 +67,17 @@ const ChatPanel = ({current_username, target_username, current_roomid}) => {
             },
         });
 	}, [subscribeToMore,current_username,target_username]);
+	if(loading) return (<div>Loading...</div>)
+	if(error){
+		console.error(error)
+		return null;
+	}
 	return (
 		<div className="chat-panel">
 			<div className="chat-header">
 				<img
 					className="profile-picture"
-					src="https://via.placeholder.com/100x100.png"
+					src={data?data.user.photo:"https://via.placeholder.com/100x100.png"}
 					alt="profile"
 				/>
 				<div>{target_username}</div>
