@@ -27,7 +27,7 @@ const ChatPanel = () => {
             updateQuery: (prev, { subscriptionData }) => {
                 console.log("updated");
                 if (!subscriptionData.data) return prev;
-                const newMsg = subscripetionData.data.message.data;
+                const newMsg = subscriptionData.data.message.data;
                 console.log(subscriptionData.data);
                 if (newMsg.from === target_username) {
                     alert(`Got a new message from ${newMsg.from}`);
