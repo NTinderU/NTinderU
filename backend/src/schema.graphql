@@ -10,15 +10,15 @@ type User {
 
 type Message {
 	id: ID!
-	roomid: String!
-	user: String!
+	from: String!
+	to: String!
 	body: String!
 	timestamp: Date
 }
 
 type Chatroom {
 	id: ID!
-	users: [User!]!
+	users: [String!]!
 	messages: [Message]!
 }
 
@@ -73,6 +73,8 @@ input messageMutationInput {
 
 type Subscription {
 	message(username: String!): MessageSubscriptionPayload!
+	like(username: String!): SP
+	match(username: String!): SP
 }
 
 enum MutationType {
@@ -83,4 +85,8 @@ enum MutationType {
 type MessageSubscriptionPayload {
 	mutation: MutationType!
 	data: Message
+}
+
+type SP {
+	data: String!
 }

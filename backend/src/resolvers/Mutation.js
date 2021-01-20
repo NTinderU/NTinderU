@@ -15,36 +15,32 @@ const Mutation = {
 		if (user) await User.deleteOne(data);
 		return user;
 	},
-	addLikedUser: async (parent, { data: { username, target } }, { User }) => {
+	addLikedUser: async (parent, { data: { username, target } }, { User, pubsub }) => {
 		await User.updateOne(
 			{ username: username }, // update Target
 			{ $addToSet: { liked: target } },
 			(err) => {
 				if (err) console.error(err);
+				pubsub.publish(`like ${target}`, {
+					like: { data: `${username} likes you.` },
+				});
+				console.log(`${username} likes ${target}`);
 			}
 		);
-		const updated = User.findOne({ username: username });
+		const updated = await User.findOne({ username: username });
+
 		return updated;
 	},
-	addMatchedUser: async (parent, { data: { username, target } }, { User }) => {
+	addMatchedUser: async (parent, { data: { username, target } }, { User, pubsub }) => {
 		await User.updateOne({ username: username }, { $addToSet: { matched: target } }, (err) => {
 			if (err) console.error(err);
+			pubsub.publish(`match with ${target}`, {
+				match: { data: `${username} matched with you.` },
+			});
+			console.log(`${username} matched with ${target}`);
 		});
-		const updated = User.findOne({ username: username });
+		const updated = await User.findOne({ username: username });
 		return updated;
-	},
-	createUser: async (parent, { data }, { User }) => {
-		let user = await User.findOne(data);
-		if (!user) {
-			user = new User(data);
-			await user.save();
-			return user;
-		} else return null;
-	},
-	deleteUser: async (parent, { data }, { User }) => {
-		const user = await User.findOne(data);
-		if (user) await User.deleteOne(data);
-		return user;
 	},
 	createChatroom: async (parent, { data }, { User, Chatroom }) => {
 		let room = new Chatroom(data);
