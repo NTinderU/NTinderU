@@ -6,6 +6,7 @@ type User {
 	password: String!
 	liked: [String!]
 	matched: [String!]
+	photo: String!
 }
 
 type Message {
