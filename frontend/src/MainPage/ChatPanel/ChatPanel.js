@@ -25,6 +25,7 @@ const ChatPanel = ({current_username, target_username, current_roomid}) => {
 	},[target_username])
 
 	const handleMessage = () => {
+		if (!body.trim().length) return;
 		addMessage({
 			variables: {
 				id: current_roomid,
