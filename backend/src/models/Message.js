@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const MessageSchema = new Schema({
+export const MessageSchema = new Schema({
 	from: {
 		type: String,
 		required: [true, "user field is required"],
@@ -19,6 +19,4 @@ const MessageSchema = new Schema({
 	},
 });
 
-const Message = model("messages", MessageSchema);
-
-export default { Message, MessageSchema };
+export const Message = model("messages", MessageSchema);

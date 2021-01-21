@@ -1,4 +1,3 @@
-import { WatchIgnorePlugin } from "webpack";
 import { randomShuffle } from "../utils/utils";
 
 const Query = {
@@ -14,7 +13,7 @@ const Query = {
 		return result;
 	},
 	match: async (parent, { data: { username, max_count } }, { User }) => {
-		console.log(username," query ",max_count)
+		console.log(username, " query ", max_count);
 		let self = await User.findOne({ username: username });
 		const notMatchedFilter = { username: { $nin: self.matched } };
 		const notSelfFilter = { username: { $ne: username } };
@@ -22,15 +21,14 @@ const Query = {
 		const others = await User.find({ $and: [notSelfFilter, notMatchedFilter] });
 		return randomShuffle(others, max_count);
 	},
-	getrooms: async (parent, {username}, {User}) =>{
-		const self = await User.findOne({username:username})
+	getrooms: async (parent, { username }, { User }) => {
+		const self = await User.findOne({ username: username });
 		//console.log(self.rooms)
-		let ret = []
-		for(let room of self.rooms)
-			ret.push({target: room[0], roomID: room[1]})
-		
-		return ret
-	}
+		let ret = [];
+		for (let room of self.rooms) ret.push({ target: room[0], roomID: room[1] });
+
+		return ret;
+	},
 };
 
 export default Query;

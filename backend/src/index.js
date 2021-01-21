@@ -1,13 +1,13 @@
 import dotenv_defaults from "dotenv-defaults";
 import { ApolloServer, PubSub } from "apollo-server-express";
 import Mongoose from "mongoose";
+import express from "express";
+import { createServer } from "http";
 import User from "./models/User";
 import { Message } from "./models/Message";
 import Chatroom from "./models/Chatroom";
-import express from "express";
-import Resolver from "./resolvers";
 import schema from "./schema.graphql";
-import { createServer } from "http";
+import Resolvers from "./resolvers";
 
 dotenv_defaults.config();
 
@@ -31,7 +31,7 @@ db.once("open", () => {
 	console.log("MongoDB connected.");
 	const server = new ApolloServer({
 		typeDefs: schema,
-		resolvers: Resolver,
+		resolvers: Resolvers,
 		context: { User, Message, Chatroom, pubsub },
 		playground: process.env.NODE_ENV === "development",
 	});
