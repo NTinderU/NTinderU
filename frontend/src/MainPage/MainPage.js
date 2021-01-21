@@ -11,7 +11,7 @@ import "./MainPage.scss";
 const MainPage = () => {
 	const { loggedInUser } = useContext(ContextStore);
 	const [mode, setMode] = useState("Matches");
-	const [matchCount, setMatchCount] = useState(3);
+	const [matchCount, setMatchCount] = useState(100);
 	const [roomid, setRoomID] = useState("none");
 	const [target_name, setTargetName] = useState("none");
 	const { loading, error, data, subscribeToMore } = useQuery(QueryPhoto, {
@@ -107,7 +107,7 @@ const MainPage = () => {
 			) : (
 				<div>You don't have any chatroom</div>
 			)}
-		</div>
+			</div>
 	);
 };
 
