@@ -3,6 +3,8 @@
 ## [109-1] Web Programming Final
 (Group 74) NTinderU
 
+- 本README的排版沒死掉版本: https://hackmd.io/@brian891221/S1NeI38y_
+
 - Deploy連結:
 https://ntinderu.github.io/NTinderU
 
