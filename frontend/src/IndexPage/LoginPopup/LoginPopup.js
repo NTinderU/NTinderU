@@ -99,10 +99,10 @@ const Popup = (props) => {
 					const hashPassword = hashSync(password, 10);
 					createUser({ variables: { username, password: hashPassword } });
 					// set login success
-					setTimeout(()=>{
+					setTimeout(() => {
 						setLoggedIn(true);
 						setLoggedInUser(username);
-					}, 500)
+					}, 500);
 				}
 				queryResult.current = false;
 			} else {

@@ -2,14 +2,13 @@ import React from "react";
 import "./ChatroomButton.scss";
 
 const ChatroomButton = (props) => {
-	const click = (evt)=>{
-		alert("clicked")
-		console.log("clicked user:")
-		console.log( props.roomID, props.username,props.idx)
-		props.sRID(props.roomID)
-		props.sTN(props.username)
-		props.sC(props.idx)
-	}
+	const click = () => {
+		console.log("clicked user:");
+		console.log(props.roomID, props.username, props.idx);
+		props.sRID(props.roomID);
+		props.sTN(props.username);
+		props.sC(props.idx);
+	};
 	return (
 		<button className={`chatroom-button${props.choosing ? " choosing" : ""}`} onClick={click}>
 			<img
@@ -23,6 +22,6 @@ const ChatroomButton = (props) => {
 			</div>
 		</button>
 	);
-}
+};
 
 export default ChatroomButton;

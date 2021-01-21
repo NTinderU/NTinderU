@@ -6,6 +6,7 @@
 	align-items: center;
 	flex-direction: column;
 	overflow: hidden;
+
 	>.mood-buttons {
 		margin: 2vh 0;
 		display: flex;
@@ -15,24 +16,5 @@
 	.user-picture-big {
 		margin-top: 8vh;
 		height: 60vh;
-	}
-
-	.keyboard-shortcuts {
-		position: relative;
-		display: flex;
-		justify-content: center;
-
-		span {
-			font-size: smaller;
-		}
-
-		svg {
-			width: 1.5em;
-			margin: 1em;
-
-			&.space-svg {
-				width: 3em;
-			}
-		}
 	}
 }

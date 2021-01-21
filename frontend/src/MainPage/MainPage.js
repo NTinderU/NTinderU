@@ -1,64 +1,66 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
 import ContextStore from "../ContextStore";
-import RoomList from "./RoomList/RoomList"
+import RoomList from "./RoomList/RoomList";
 import MatchPanel from "./MatchPanel/MatchPanel";
 import ChatPanel from "./ChatPanel/ChatPanel";
-import "./MainPage.scss";
-import { useQuery } from "@apollo/client";
-import QueryPhoto from "./graphql/QueryPhoto"
+import QueryPhoto from "./graphql/QueryPhoto";
 import SubscribeMatch from "./graphql/SubscribeMatch";
-
+import "./MainPage.scss";
 
 const MainPage = () => {
-	// eslint-disable-next-line no-unused-vars
 	const { loggedInUser } = useContext(ContextStore);
 	const [mode, setMode] = useState("Matches");
 	const [matchCount, setMatchCount] = useState(3);
-	const [roomid, setRoomID] = useState("none")
-	const [target_name, setTargetName] = useState("none")
-	const {loading, error, data, subscribeToMore } = useQuery(QueryPhoto,{
-		variables:{
-			username: loggedInUser
-		}
-	})
+	const [roomid, setRoomID] = useState("none");
+	const [target_name, setTargetName] = useState("none");
+	const { loading, error, data, subscribeToMore } = useQuery(QueryPhoto, {
+		variables: {
+			username: loggedInUser,
+		},
+	});
 	useEffect(() => {
-        subscribeToMore({
-            document: SubscribeMatch,	
-            variables: { username: loggedInUser },
-            updateQuery: (prev, { subscriptionData }) => {
-				console.log("=================")
-				console.log(prev)
-				console.log("-----------")
-				console.log(subscriptionData)
-				console.log("----------")
+		subscribeToMore({
+			document: SubscribeMatch,
+			variables: { username: loggedInUser },
+			updateQuery: (prev, { subscriptionData }) => {
+				console.log("=================");
+				console.log(prev);
+				console.log("-----------");
+				console.log(subscriptionData);
+				console.log("----------");
 				console.log({
 					getrooms: [...prev.getrooms, subscriptionData.data.match.data],
-					user: prev.user
-				})
-				console.log("=================")
-                return {
+					user: prev.user,
+				});
+				console.log("=================");
+				return {
 					prev,
 					getrooms: [...prev.getrooms, subscriptionData.data.match.data],
-					user: prev.user
-                };
-            },
-        });
-	},[]);
+					user: prev.user,
+				};
+			},
+		});
+	}, []);
 
-	if(loading) return null
-	if(error){
+	if (loading) return null;
+	if (error) {
 		console.error(error);
 		return null;
 	}
 
-	console.log(data)
+	console.log(data);
 	return (
 		<div className="main">
 			<div className="left-panel">
 				<div className="profile-wrapper">
 					<img
 						className="profile-picture"
-						src={data.user?data.user.photo:"https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"}
+						src={
+							data.user
+								? data.user.photo
+								: "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
+						}
 						alt="X"
 					/>
 					<div className="profile-title">My Profile</div>
@@ -72,20 +74,39 @@ const MainPage = () => {
 					</button>
 					<button
 						className={`${mode === "Messages" ? "mode-choosing" : ""}`}
-						onClick={() => { let rooms = data.getrooms
-							if(rooms.length>0){setRoomID(rooms[0].roomID);setTargetName(rooms[0].target)}
-							setMode("Messages")}}
+						onClick={() => {
+							let rooms = data.getrooms;
+							if (rooms.length > 0) {
+								setRoomID(rooms[0].roomID);
+								setTargetName(rooms[0].target);
+							}
+							setMode("Messages");
+						}}
 					>
 						Messages
 					</button>
 				</div>
 				<div className="messages">
 					{mode === "Messages" ? (
-						<RoomList rooms={data.getrooms} setRoomID={setRoomID} setTargetName={setTargetName}></RoomList>
+						<RoomList
+							rooms={data.getrooms}
+							setRoomID={setRoomID}
+							setTargetName={setTargetName}
+						></RoomList>
 					) : null}
 				</div>
 			</div>
-			{mode === "Matches" ? <MatchPanel matchCount={matchCount}/> : roomid!=="none"?<ChatPanel current_roomid={roomid} target_username={target_name} current_username={loggedInUser}/>:<div>You don't have any chatroom</div>}
+			{mode === "Matches" ? (
+				<MatchPanel matchCount={matchCount} />
+			) : roomid !== "none" ? (
+				<ChatPanel
+					current_roomid={roomid}
+					target_username={target_name}
+					current_username={loggedInUser}
+				/>
+			) : (
+				<div>You don't have any chatroom</div>
+			)}
 		</div>
 	);
 };
