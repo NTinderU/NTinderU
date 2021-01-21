@@ -1,13 +1,15 @@
 # 網服期末Project
 
-[109-1] Web Programming Final
+## [109-1] Web Programming Final
 (Group 74) NTinderU
 
+- 本README的排版沒死掉版本: https://hackmd.io/@brian891221/S1NeI38y_
+
 - Deploy連結:
-(Here)
+https://ntinderu.github.io/NTinderU
 
 - Demo影片連結:
-(Here)
+https://youtu.be/Ixw0OZebQq0
 
 - 描述這個服務在做什麼:
 NTinderU是由台大學生親手打造，土生土長保證純血
@@ -24,6 +26,17 @@ NTinderU是由台大學生親手打造，土生土長保證純血
 各位老師們別羞辱我們了
 
 - 其他說明:
+
+--- 
+
+**如果白色畫面讀取很久的話，是因為我們沒有用SSL加密過的websocket**
+**Firefox:**: 請到about:config尋找network.websocket.allowInsecureFromHTTPS這項設定並將它改成true
+**Chrome/Edge**: 請暫時disable websocket或使用safari
+**後續會想辦法修正這個問題**
+**如果助教想評分的話建議clone下來進frontend然後yarn start**
+
+---
+
 目前由於後端Server不夠強有時候會有聊天室沒有成功出現的情形
 只要重新登入就可以看見了
 
@@ -45,6 +58,13 @@ NTinderU是由台大學生親手打造，土生土長保證純血
     - Apollo Client/Server (graphql)
     - Mongoose
     - React-bootstrap
+    - webpack
+    - properJS
+    - bCryptJS
+    - jQuery 
+    - React JS sass
+    - gh-pages 
+    - heroku
 
 ---
 
@@ -59,6 +79,7 @@ NTinderU是由台大學生親手打造，土生土長保證純血
     
     - B08902134 曾揚哲
     負責聊天部分的後端
+    連接前後端
     上傳圖片至imgur的相關元件
     大腿
     
