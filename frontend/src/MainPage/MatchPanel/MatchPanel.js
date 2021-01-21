@@ -32,7 +32,7 @@ const MatchPanel = ({ matchCount }) => {
 	const getMatchObject = () => {
 		if (data === null) {
 			return {
-				username: "No People",
+				username: "No People. Press Any Button to refetch",
 				liked: [],
 				photo: "https://via.placeholder.com/320x500.png",
 			};
@@ -55,7 +55,7 @@ const MatchPanel = ({ matchCount }) => {
 	const likeSomeone = () => {
 		let obj = getMatchObject();
 		let target = obj.username;
-		if (target !== "No People") {
+		if (target !== "No People. Press Any Button to refetch") {
 			console.log("target:", target);
 			addLikedTarget({
 				variables: {
