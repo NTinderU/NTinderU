@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import MoodButton from "./MoodButton/MoodButton";
 import ContextStore from "../../ContextStore";
@@ -11,17 +11,20 @@ const MatchPanel = ({ matchCount }) => {
 	const { loggedInUser } = useContext(ContextStore);
 	const [matchIndex, setMatchIndex] = useState(0);
 	const [isEnd, setIsEnd] = useState(false);
-	const { loading, error, data } = useQuery(QueryMatch, {
+	const { loading, error, data, refetch} = useQuery(QueryMatch, {
 		variables: { username: loggedInUser, max_count: matchCount },
 	});
 	const [addLikedTarget] = useMutation(AddLikedTarget);
 	const [addMatchedTarget] = useMutation(AddMatchedTarget);
 
-	const nextPeople = () => {
+	const nextPeople = async () => {
 		console.log(matchIndex, data);
 		if (matchIndex === data.match.length - 1) {
 			console.log("No more people");
 			setIsEnd(true);
+			await refetch()
+			setMatchIndex(0)
+			setIsEnd(false)
 		} else {
 			setMatchIndex(matchIndex + 1);
 		}
@@ -29,14 +32,14 @@ const MatchPanel = ({ matchCount }) => {
 	const getMatchObject = () => {
 		if (data === null) {
 			return {
-				username: "No People",
+				username: "No People. Press Any Button to refetch",
 				liked: [],
 				photo: "https://via.placeholder.com/320x500.png",
 			};
 		}
 		if (data.match.length === 0 || isEnd) {
 			return {
-				username: "No People",
+				username: "No People. Press Any Button to refetch",
 				liked: [],
 				photo: "https://via.placeholder.com/320x500.png",
 			};
@@ -52,7 +55,7 @@ const MatchPanel = ({ matchCount }) => {
 	const likeSomeone = () => {
 		let obj = getMatchObject();
 		let target = obj.username;
-		if (target !== "No People") {
+		if (target !== "No People. Press Any Button to refetch") {
 			console.log("target:", target);
 			addLikedTarget({
 				variables: {

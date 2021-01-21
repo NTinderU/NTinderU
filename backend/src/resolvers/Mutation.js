@@ -5,7 +5,7 @@ const Mutation = {
 			data.liked = [];
 			data.matched = [];
 			data.rooms = [];
-			data.photo = "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
+			data.photo = data.photo || "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
 			user = new User(data);
 			await user.save();
 			return user;
