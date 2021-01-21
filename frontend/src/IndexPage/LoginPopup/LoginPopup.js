@@ -97,10 +97,16 @@ const Popup = (props) => {
 				} else if (queryResult.current) {
 					// new user
 					const hashPassword = hashSync(password, 10);
-					createUser({ variables: { username, password: hashPassword } });
+
+					setTimeout(() => {
+						setLoggedIn(true);
+						setLoggedInUser(username);
+					}, 2500);
+
+					createUser({
+						variables: { username, password: hashPassword },
+					});
 					// set login success
-					setLoggedIn(true);
-					setLoggedInUser(username);
 				}
 				queryResult.current = false;
 			} else {

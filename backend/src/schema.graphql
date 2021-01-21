@@ -6,6 +6,8 @@ type User {
 	password: String!
 	liked: [String!]
 	matched: [String!]
+	photo: String!
+	intro: String
 }
 
 type Message {
@@ -31,6 +33,12 @@ type Query {
 	match(data: MatchInput!): [User!]
 	chatroom(id: ID!): Chatroom
 	chatrooms: [Chatroom]!
+	getrooms(username: String!): [Match!]
+}
+
+type Match{
+	target: String!
+	roomID: ID!
 }
 
 type Mutation {
@@ -88,5 +96,6 @@ type MessageSubscriptionPayload {
 }
 
 type SP {
-	data: String!
+	mutation: MutationType!
+	data: Match!
 }
