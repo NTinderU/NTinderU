@@ -3,6 +3,7 @@
 	"version": "0.1.0",
 	"license": "MIT",
 	"repository": "https://github.com/NTinderU/NTinderU",
+	"homepage": "/NTinderU",
 	"author": "NTinderU",
 	"private": true,
 	"dependencies": {
