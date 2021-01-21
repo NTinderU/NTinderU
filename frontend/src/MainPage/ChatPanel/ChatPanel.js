@@ -19,7 +19,7 @@ const ChatPanel = ({current_username, target_username, current_roomid}) => {
 	// 	console.log("data changed");
 	// 	console.log(data);
 	// }, [data]);
-
+	/*
 	useEffect(() => {
 		subscribeToMore({
 			document: SubscribeMessage,
@@ -34,7 +34,7 @@ const ChatPanel = ({current_username, target_username, current_roomid}) => {
 				};
 			},
 		});
-	}, [subscribeToMore,current_username]);
+	}, [subscribeToMore,current_username]);*/
 
 	const handleMessage = () => {
 		addMessage({
