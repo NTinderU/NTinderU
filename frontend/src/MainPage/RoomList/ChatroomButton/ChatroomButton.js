@@ -3,8 +3,6 @@ import "./ChatroomButton.scss";
 
 const ChatroomButton = (props) => {
 	const click = () => {
-		console.log("clicked user:");
-		console.log(props.roomID, props.username, props.idx);
 		props.sRID(props.roomID);
 		props.sTN(props.username);
 		props.sC(props.idx);
@@ -13,7 +11,7 @@ const ChatroomButton = (props) => {
 		<button className={`chatroom-button${props.choosing ? " choosing" : ""}`} onClick={click}>
 			<img
 				className="chatroom-button-picture"
-				src="https://via.placeholder.com/100.png"
+				src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
 				alt="user big"
 			/>
 			<div className="chatroom-information">

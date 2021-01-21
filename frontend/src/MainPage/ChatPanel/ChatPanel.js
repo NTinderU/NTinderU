@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { useQuery, useMutation } from "@apollo/client";
+import ContextStore from "../../ContextStore";
 import createMessage from "../graphql/CreateMessage";
 import queryChatroom from "../graphql/QueryChatroom";
-import { useQuery, useMutation } from "@apollo/client";
 import SubscribeMessage from "../graphql/SubscribeMessage";
 import Submit from "../../svg/Submit";
 import "./ChatPanel.scss";
 
-const ChatPanel = ({ current_username, target_username, current_roomid }) => {
-	console.log("Chat Panel", target_username);
+const ChatPanel = ({ target_username, current_roomid }) => {
+	const { loggedInUser } = useContext(ContextStore);
+
 	const { loading, error, data, subscribeToMore, refetch } = useQuery(queryChatroom, {
 		variables: {
 			id: current_roomid,
 			target: target_username,
 		},
 	});
+
 	const [body, setBody] = useState("");
 	const messagesRef = useRef(null);
 	const [addMessage] = useMutation(createMessage);
@@ -40,7 +43,7 @@ const ChatPanel = ({ current_username, target_username, current_roomid }) => {
 		addMessage({
 			variables: {
 				id: current_roomid,
-				from: current_username,
+				from: loggedInUser,
 				to: target_username,
 				body: body.trim(),
 			},
@@ -49,44 +52,41 @@ const ChatPanel = ({ current_username, target_username, current_roomid }) => {
 	};
 
 	useEffect(() => {
-		console.log("load subscribeToMore");
 		subscribeToMore({
 			document: SubscribeMessage,
-			variables: { username: current_username },
+			variables: { username: loggedInUser },
 			updateQuery: (prev, { subscriptionData }) => {
-				console.log(prev, subscriptionData);
 				const prevMsg = prev.chatroom.messages;
 				if (!subscriptionData.data) return prev;
 				const newMsg = subscriptionData.data.message.data;
-				console.log([...prevMsg, newMsg]);
-				if (newMsg.from !== target_username && newMsg.from !== current_username) {
-					return prev;
-				}
+				if (newMsg.from !== target_username && newMsg.from !== loggedInUser) return prev;
+
 				return {
 					prev,
 					chatroom: {
 						id: current_roomid,
-						users: [current_username, target_username],
+						users: [loggedInUser, target_username],
 						messages: [...prevMsg, newMsg],
 					},
 				};
 			},
 		});
-	}, [current_roomid, current_username, subscribeToMore, target_username]);
+	}, [current_roomid, loggedInUser, subscribeToMore, target_username]);
 
 	if (loading) return <div>Loading...</div>;
 
-	if (error) {
-		console.error(error);
-		return null;
-	}
+	if (error) return <></>;
 
 	return (
 		<div className="chat-panel">
 			<div className="chat-header">
 				<img
 					className="profile-picture"
-					src={data ? data.user.photo : "https://via.placeholder.com/100x100.png"}
+					src={
+						data
+							? data.user.photo
+							: "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg"
+					}
 					alt="profile"
 				/>
 				<div>{target_username}</div>
@@ -99,7 +99,7 @@ const ChatPanel = ({ current_username, target_username, current_roomid }) => {
 				) : (
 					data.chatroom.messages.map(({ from, body }, i) => (
 						<div
-							className={`chat-message${from === current_username ? " self" : ""}`}
+							className={`chat-message${from === loggedInUser ? " self" : ""}`}
 							key={i}
 						>
 							<span>{body}</span>

@@ -5,7 +5,8 @@ import MainPage from "./MainPage/MainPage";
 
 const App = () => {
 	const [loggedIn, setLoggedIn] = useState(false);
-	const [loggedInUser, setLoggedInUser] = useState("test");
+	const [loggedInUser, setLoggedInUser] = useState("");
+
 	return (
 		<ContextStore.Provider value={{ setLoggedIn, loggedInUser, setLoggedInUser }}>
 			{loggedIn ? <MainPage /> : <IndexPage />}

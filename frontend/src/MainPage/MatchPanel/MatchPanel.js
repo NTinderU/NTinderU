@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import MoodButton from "./MoodButton/MoodButton";
 import ContextStore from "../../ContextStore";
@@ -11,23 +11,19 @@ const MatchPanel = ({ matchCount }) => {
 	const { loggedInUser } = useContext(ContextStore);
 	const [matchIndex, setMatchIndex] = useState(0);
 	const [isEnd, setIsEnd] = useState(false);
-	const { loading, error, data, refetch} = useQuery(QueryMatch, {
+	const { loading, error, data, refetch } = useQuery(QueryMatch, {
 		variables: { username: loggedInUser, max_count: matchCount },
 	});
 	const [addLikedTarget] = useMutation(AddLikedTarget);
 	const [addMatchedTarget] = useMutation(AddMatchedTarget);
 
 	const nextPeople = async () => {
-		console.log(matchIndex, data);
 		if (matchIndex === data.match.length - 1) {
-			console.log("No more people");
 			setIsEnd(true);
-			await refetch()
-			setMatchIndex(0)
-			setIsEnd(false)
-		} else {
-			setMatchIndex(matchIndex + 1);
-		}
+			await refetch();
+			setMatchIndex(0);
+			setIsEnd(false);
+		} else setMatchIndex(matchIndex + 1);
 	};
 	const getMatchObject = () => {
 		if (data === null) {
@@ -56,7 +52,6 @@ const MatchPanel = ({ matchCount }) => {
 		let obj = getMatchObject();
 		let target = obj.username;
 		if (target !== "No People. Press Any Button to refetch") {
-			console.log("target:", target);
 			addLikedTarget({
 				variables: {
 					username: loggedInUser,
@@ -64,7 +59,6 @@ const MatchPanel = ({ matchCount }) => {
 				},
 			});
 			if (obj.liked.includes(loggedInUser)) {
-				console.log("Match! ", loggedInUser, target);
 				addMatchedTarget({
 					variables: {
 						username: loggedInUser,
@@ -76,10 +70,8 @@ const MatchPanel = ({ matchCount }) => {
 	};
 
 	if (loading) return <span>Loading...</span>;
-	if (error) {
-		console.log(error);
-		return null;
-	}
+
+	if (error) return <></>;
 
 	return (
 		<div className="match-panel">

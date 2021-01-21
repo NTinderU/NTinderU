@@ -11,7 +11,7 @@ import "./MainPage.scss";
 const MainPage = () => {
 	const { loggedInUser } = useContext(ContextStore);
 	const [mode, setMode] = useState("Matches");
-	const [matchCount, setMatchCount] = useState(30);
+	const matchCount = 30;
 	const [roomid, setRoomID] = useState("none");
 	const [target_name, setTargetName] = useState("none");
 	const { loading, error, data, subscribeToMore } = useQuery(QueryPhoto, {
@@ -24,16 +24,6 @@ const MainPage = () => {
 			document: SubscribeMatch,
 			variables: { username: loggedInUser },
 			updateQuery: (prev, { subscriptionData }) => {
-				console.log("=================");
-				console.log(prev);
-				console.log("-----------");
-				console.log(subscriptionData);
-				console.log("----------");
-				console.log({
-					getrooms: [...prev.getrooms, subscriptionData.data.match.data],
-					user: prev.user,
-				});
-				console.log("=================");
 				return {
 					prev,
 					getrooms: [...prev.getrooms, subscriptionData.data.match.data],
@@ -41,15 +31,10 @@ const MainPage = () => {
 				};
 			},
 		});
-	}, []);
+	}, [loggedInUser, subscribeToMore]);
 
-	if (loading) return null;
-	if (error) {
-		console.error(error);
-		return null;
-	}
+	if (loading || error) return <></>;
 
-	console.log(data);
 	return (
 		<div className="main">
 			<div className="left-panel">
@@ -107,7 +92,7 @@ const MainPage = () => {
 			) : (
 				<div>You don't have any chatroom</div>
 			)}
-			</div>
+		</div>
 	);
 };
 

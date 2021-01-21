@@ -8,9 +8,9 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
-const L = "localhost:4000" // "ntinderu-backend.herokuapp.com";
+const L = "ntinderu-backend.herokuapp.com";
 const httpLink = new HttpLink({
-	uri: `http://${L}/`,
+	uri: `https://${L}/`,
 });
 
 // Create a WebSocket link:

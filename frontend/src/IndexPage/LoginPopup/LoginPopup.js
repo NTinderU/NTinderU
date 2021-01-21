@@ -21,9 +21,6 @@ const Popup = (props) => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
-	const [file, setFile] = useState("");
-	const [filepath, setFP] = useState("");
-
 	const [loadUser, { loading, data }] = useLazyQuery(QueryUser, {
 		variables: { username },
 	});
@@ -89,8 +86,6 @@ const Popup = (props) => {
 		if (username) loadUser();
 	}, [username, loadUser]);
 
-	
-
 	useEffect(() => {
 		if (username && password && data) {
 			if (!props.signin) {
@@ -102,17 +97,16 @@ const Popup = (props) => {
 				} else if (queryResult.current) {
 					// new user
 					const hashPassword = hashSync(password, 10);
-					let p = uploadFile();
-					alert(p);
-					alert("Redirecting...");
+
 					setTimeout(() => {
 						setLoggedIn(true);
 						setLoggedInUser(username);
 					}, 2500);
-					
-					createUser({ variables: { username, password: hashPassword, photo: p } });
+
+					createUser({
+						variables: { username, password: hashPassword },
+					});
 					// set login success
-					
 				}
 				queryResult.current = false;
 			} else {
@@ -151,27 +145,6 @@ const Popup = (props) => {
 
 	const inputEnter = (e) => (e.key === "Enter" ? enterEvent() : undefined);
 
-	const uploadFile = async () => {
-		let r = new XMLHttpRequest();
-		let d = new FormData()
-		setFile(document.getElementById("upload-pic").files[0]);
-		if(!file) return;
-		// console.log(file);
-		d.append('image', file);
-		let u = "";
-		r.open("POST", "https://api.imgur.com/3/image/");
-		r.setRequestHeader("Authorization", `Client-ID 9168127d8892b1c`);
-		r.onreadystatechange = () => {
-			if (r.status === 200 && r.readyState === 4) {
-				let res = JSON.parse(r.responseText);
-				u = `https://i.imgur.com/${res.data.id}.png`;
-				alert(`link: ${u}`);
-				return u;
-			}
-		};
-		r.send(d);
-		return await r.onreadystatechange();
-	}
 	return (
 		<Modal show={props.show} onHide={props.onHide} className="popup-modal" centered>
 			<Modal.Header>
@@ -238,14 +211,6 @@ const Popup = (props) => {
 								<Form.Text className="error">
 									{confirmErrors[props.confirmError]}
 								</Form.Text>
-								<Form.Label>Upload Profile Picture</Form.Label>
-								<Form.File
-									id="upload-pic"
-									label="Upload Profile Picture"
-									lang="en"
-									custom
-									disabled={loading}
-								/>
 							</Form.Group>
 							<Form.Text>
 								Have an account?{" "}
