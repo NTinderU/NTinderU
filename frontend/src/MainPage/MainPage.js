@@ -11,7 +11,7 @@ import "./MainPage.scss";
 const MainPage = () => {
 	const { loggedInUser } = useContext(ContextStore);
 	const [mode, setMode] = useState("Matches");
-	const [matchCount, setMatchCount] = useState(3);
+	const [matchCount, setMatchCount] = useState(30);
 	const [roomid, setRoomID] = useState("none");
 	const [target_name, setTargetName] = useState("none");
 	const { loading, error, data, subscribeToMore } = useQuery(QueryPhoto, {
