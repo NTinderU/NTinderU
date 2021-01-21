@@ -1,13 +1,13 @@
 # 網服期末Project
 
-[109-1] Web Programming Final
+## [109-1] Web Programming Final
 (Group 74) NTinderU
 
 - Deploy連結:
-(Here)
+ntinderu.github.io/NTinderU
 
 - Demo影片連結:
-(Here)
+https://youtu.be/Ixw0OZebQq0
 
 - 描述這個服務在做什麼:
 NTinderU是由台大學生親手打造，土生土長保證純血
@@ -45,6 +45,13 @@ NTinderU是由台大學生親手打造，土生土長保證純血
     - Apollo Client/Server (graphql)
     - Mongoose
     - React-bootstrap
+    - webpack
+    - properJS
+    - bCryptJS
+    - jQuery 
+    - React JS sass
+    - gh-pages 
+    - heroku
 
 ---
 
@@ -59,6 +66,7 @@ NTinderU是由台大學生親手打造，土生土長保證純血
     
     - B08902134 曾揚哲
     負責聊天部分的後端
+    連接前後端
     上傳圖片至imgur的相關元件
     大腿
     
