@@ -3,8 +3,9 @@ import "./ChatroomButton.scss";
 
 const ChatroomButton = (props) => {
 	const click = (evt)=>{
-		//console.log(evt.target)
-		console.log(props.roomID, props.username,props.idx)
+		alert("clicked")
+		console.log("clicked user:")
+		console.log( props.roomID, props.username,props.idx)
 		props.sRID(props.roomID)
 		props.sTN(props.username)
 		props.sC(props.idx)

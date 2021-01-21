@@ -8,13 +8,14 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
+const L = "localhost:4000" // ntinderu-backend.herokuapp.com
 const httpLink = new HttpLink({
-	uri: "https://ntinderu-backend.herokuapp.com/",
+	uri: `http://${L}/`,
 });
 
 // Create a WebSocket link:
 const wsLink = new WebSocketLink({
-	uri: `ws://ntinderu-backend.herokuapp.com/graphql`,
+	uri: `ws://${L}/graphql`,
 	options: { reconnect: true },
 });
 

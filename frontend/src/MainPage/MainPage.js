@@ -6,6 +6,7 @@ import ChatPanel from "./ChatPanel/ChatPanel";
 import "./MainPage.scss";
 import { useQuery } from "@apollo/client";
 import QueryPhoto from "./graphql/QueryPhoto"
+import SubscribeMatch from "./graphql/SubscribeMatch";
 
 
 const MainPage = () => {
@@ -20,6 +21,29 @@ const MainPage = () => {
 			username: loggedInUser
 		}
 	})
+	useEffect(() => {
+        subscribeToMore({
+            document: SubscribeMatch,	
+            variables: { username: loggedInUser },
+            updateQuery: (prev, { subscriptionData }) => {
+				console.log("=================")
+				console.log(prev)
+				console.log("-----------")
+				console.log(subscriptionData)
+				console.log("----------")
+				console.log({
+					getrooms: [...prev.getrooms, subscriptionData.data.match.data],
+					user: prev.user
+				})
+				console.log("=================")
+                return {
+					prev,
+					getrooms: [...prev.getrooms, subscriptionData.data.match.data],
+					user: prev.user
+                };
+            },
+        });
+	},[]);
 
 	if(loading) return null
 	if(error){
