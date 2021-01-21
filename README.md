@@ -24,6 +24,11 @@ NTinderU是由台大學生親手打造，土生土長保證純血
 各位老師們別羞辱我們了
 
 - 其他說明:
+**如果白色畫面讀取很久的話，是因為我們沒有用SSL加密過的websocket**
+**Firefox:**: 請到about:config尋找network.websocket.allowInsecureFromHTTPS這項設定並將它改成true
+**Chrome/Edge**: 請暫時disable websocket或使用safari
+**後續會想辦法修正這個問題**
+**如果助教想評分的話建議clone下來進frontend然後yarn start**
 目前由於後端Server不夠強有時候會有聊天室沒有成功出現的情形
 只要重新登入就可以看見了
 
