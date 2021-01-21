@@ -17,27 +17,6 @@ const ChatPanel = ({current_username, target_username, current_roomid}) => {
 	const [body, setBody] = useState("");
 	const [addMessage] = useMutation(createMessage);
 
-	// useEffect(() => {
-	// 	console.log("data changed");
-	// 	console.log(data);
-	// }, [data]);
-	/*
-	useEffect(() => {
-		subscribeToMore({
-			document: SubscribeMessage,
-			variables: { username: current_username },
-			updateQuery: (prev, { subscriptionData }) => {
-				if (!subscriptionData.data) return prev;
-				const newMsg = subscriptionData.data.message.data;
-
-				return {
-					...prev,
-					messages: [...prev.messages, newMsg],
-				};
-			},
-		});
-	}, [subscribeToMore,current_username]);*/
-
 	useEffect(()=>{
 		refetch({variables:{
 			id: current_roomid,
@@ -66,12 +45,12 @@ const ChatPanel = ({current_username, target_username, current_roomid}) => {
 				console.log(prev, subscriptionData)
                 //alert("updated");
                 const prevMsg = prev.chatroom.messages;
-                if (!subscriptionData.data) return prevMsg;
+                if (!subscriptionData.data) return prev;
                 const newMsg = subscriptionData.data.message.data;
                 console.log([...prevMsg, newMsg]);
                 if (newMsg.from !== target_username&&newMsg.from!==current_username) {
 					//alert(`Got a new message from ${newMsg.from}`);
-					return prevMsg
+					return prev
                 }
                 return {
                     prev,
