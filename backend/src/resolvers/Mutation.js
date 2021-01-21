@@ -87,6 +87,9 @@ const Mutation = {
 		pubsub.publish(`message about ${data.to}`, {
 			message: { mutation: "CREATED", data: data },
 		});
+		pubsub.publish(`message about ${data.from}`, {
+			message: { mutation: "CREATED", data: data },
+		});
 		return data;
 	},
 };
